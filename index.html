@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Socket-Test</title>
+    <script type="text/javascript" src="https://cdn.socket.io/4.2.0/socket.io.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var socket = io.connect('http://127.0.0.1:5000');
+            socket.on('connect',function(){
+                socket.send('User has connected!');
+            });
+
+            socket.on('message',function(msg){
+                $('#message').append('<li>'+msg+'</li>')
+            });
+
+            $('#Sendbtn').on('click',function(){
+                socket.send($("#Mymessage").val());
+                $('#Mymessage').val('');
+            });
+        });
+    </script>
+    <ul id="message">
+        
+    </ul>
+    <input type="text" id="Mymessage">
+    <button id="Sendbtn">Send</button>
+</body>
+
+
+</html>
